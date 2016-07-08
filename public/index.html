@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TDC2016 | São Paulo | Usage of geospatial data with MongoDB</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css"/>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">
+        <h1>TDC2016 | São Paulo | Usage of geospatial data with MongoDB</h1>
+    </div>
+
+    <!-- Slider -->
+    <div>
+        <div id="slider"></div>
+        <div id="attendees" align=center></div><p> 
+    </div>
+
+    <!-- Google Map -->
+    <div id="map"></div>
+
+    <!-- Console -->
+    <div id="console">
+        <textarea id="console-output" readonly></textarea>
+    </div>
+    
+    <!-- Footer -->
+    <div id="footer">
+    <p>Developed by Luiz Svoboda / Gustavo Coelho
+        | <a href="http://www.thedevelopersconference.com.br/tdc/2016/saopaulo/trilha-nosql">TDC 2016 São Paulo</a>
+        | <a href="https://github.com/gcoelho/tdc2016-geomongo">GitHub</a></p>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        var map;
+        var batman;
+        var superman;
+        var wonderwoman;
+
+        function initMap() {
+            // Create map
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14,
+                center: {lat: -23.6003247, lng: -46.6779739}
+            });
+
+            // Add TDC to map
+            var tdc = new google.maps.Marker({
+                icon: "images/tdc.png",
+                title: "TDC",
+                position: {lat: -23.599981, lng: -46.677014} 
+            });
+            tdc.setMap(map);
+
+            // Create markers without position yet
+            batman = new google.maps.Marker({
+                icon:"images/batman.png",
+                title:"Batman"
+            });
+            batman.setMap(map);
+
+            superman = new google.maps.Marker({
+                icon:"images/superman.png",
+                title:"Superman"
+            });
+            superman.setMap(map);
+
+            wonderwoman = new google.maps.Marker({
+                icon:"images/wonder-woman.png",
+                title:"Wonder Woman"
+            });
+            wonderwoman.setMap(map);
+
+        };
+
+        // Function called when slider is used
+        $(function() {
+            $("#slider").slider({
+                min: 0,
+                max: 23,
+                step: 1,
+                slide: function(event, ui) {
+                    // Compute date/time from slider
+                    let dateTime;
+                    if (ui.value < 10) {
+                        dateTime = "2016-07-08T0"+ui.value+":00:00.000Z"
+                    } else {
+                        dateTime = "2016-07-08T"+ui.value+":00:00.000Z"
+                    }
+
+                    // Retrieve checkins for that specific date/time
+                    $.get("/checkins", {
+                            date: dateTime
+                        }, function(result) {
+                            // On success update markers with new position
+                            $("#console-output").val(JSON.stringify(result));
+                            
+                            batman.setPosition(
+                                new google.maps.LatLng(
+                                    result.features[0].geometry.coordinates[1],
+                                    result.features[0].geometry.coordinates[0]
+                                )
+                            );
+
+                            superman.setPosition(
+                                new google.maps.LatLng(
+                                    result.features[1].geometry.coordinates[1],
+                                    result.features[1].geometry.coordinates[0]
+                                )
+                            );
+
+                            wonderwoman.setPosition(
+                                new google.maps.LatLng(
+                                    result.features[2].geometry.coordinates[1],
+                                    result.features[2].geometry.coordinates[0]
+                                )
+                            );
+
+                            // Retrieve how many superheroes are at TDC and update UI
+                            $.get("/attendees", {
+                                    date: dateTime
+                                }, function(result) {
+                                    $("#attendees").html("<b>Superheroes at TDC: " + result.attendees + "</b>");
+                                }
+                            );
+                        }
+                    );
+                }
+            });
+        });
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<KEY>&callback=initMap">
+    </script>
+
+</body>

@@ -1,0 +1,13 @@
+{
+  "name": "geoapp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node start.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "mongodb": "~2.1.18",
+    "express": "~4.13.1"
+  }
+}

@@ -1,0 +1,43 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:10px;
+}
+
+#slider {
+    background-color: gray;
+    color:black;
+    text-align:center;
+    margin: 30px;
+}
+
+#map {
+    height:70%;
+    padding:10px;
+}
+
+#console {
+    height:10%;
+    padding:10px;
+}
+
+#console-output {
+    height:100%; 
+    width:100%;
+    resize: none;
+}
+
+#footer {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:10px; 
+}

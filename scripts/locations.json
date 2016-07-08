@@ -1,0 +1,8 @@
+{"name":"FiqFit Gourmet","category":"restaurant","location":{"type":"Point","coordinates":[-46.675728,-23.600291]}}
+{"name":"Tabuleiro do Marconi","category":"restaurant","location":{"type":"Point","coordinates":[-46.678368,-23.599556]}}
+{"name":"Santo Kone","category":"restaurant","location":{"type":"Point","coordinates":[-46.677615,-23.598494]}}
+{"name":"Mexicanissimo","category":"restaurant","location":{"type":"Point","coordinates":[-46.678025,-23.598403]}}
+{"name":"Restaurante Vila","category":"restaurant","location":{"type":"Point","coordinates":[-46.684635,-23.598396]}}
+{"name":"Temakeria e Cia","category":"restaurant","location":{"type":"Point","coordinates":[-46.68449,-23.597314]}}
+{"name":"Restaurante Hooters","category":"restaurant","location":{"type":"Point","coordinates":[-46.687971,-23.596051]}}
+{"name":"Universidade Anhembi Morumbi","category":"university","location":{"type":"Polygon","coordinates":[[[-46.677225,-23.599712],[-46.677413,-23.60006],[-46.676886,-23.600301],[-46.676705,-23.599939],[-46.677225,-23.599712]]]}}
