@@ -8,5 +8,6 @@ db.locations.find(
         }
       }
     }
-  }
+  },
+  {"_id" : 0}
 )

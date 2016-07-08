@@ -10,5 +10,6 @@ db.locations.find(
            $maxDistance: 2000
         }
      }
-   }
+   },
+  {"_id" : 0}
 )
